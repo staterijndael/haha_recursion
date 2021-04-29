@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+int main() {
+	setlocale(LC_ALL, "Russian");
+
+	int n = 5;
+	int map[n][n] = {0};
+	int x, y;
+
+	for (int i = 0; i < n; i++) { // расстановка кораблей случайным образом
+		x = rand() % n;
+		y = rand() % n;
+		map[x][y] = 1;
+	}
+
+
+
+	while (true) {
+		cout << "Куда стреляем" << endl;
+		cin >> x >> y; 
+
+		if (map[x][y] == 1) {
+			cout << "Попал, красавчик" << endl;
+			map[x][y] = 3; // цифра для попадания
+
+			bool ship_detect = false;
+
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < n; j++) {
+					if (map[i][j] == 1) {
+						ship_detect = true;
+						break;
+					}
+				}
+				if (ship_detect == true) {
+					break;
+				}
+			}
+			if (ship_detect == false) {
+				cout << "Вы выиграли, конгратьюлейшен!" << endl;
+				break;
+			}
+		}
+		else {
+			cout << "Мазила" << endl;
+			map[x][y] = 4; // цифра для промаха
+		}
+
+	}
+	return 0;
+
+}
