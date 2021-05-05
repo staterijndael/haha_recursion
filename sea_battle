@@ -1,56 +1,162 @@
 #include <iostream>
-#include <cmath>
+#include <cstdlib>
+#include <Windows.h>
 #include <iomanip>
 #include <string>
+#include <cmath>
 
 using namespace std;
+
+
 int main() {
 	setlocale(LC_ALL, "Russian");
 
-	int n = 5;
-	int map[n][n] = {0};
-	int x, y;
+	int arr[100][100][100], n = 10;
+	cout << "Первый игрок расставляет корабли" << endl;
+	_sleep(2000);
+	system("cls");
 
-	for (int i = 0; i < n; i++) { // расстановка кораблей случайным образом
-		x = rand() % n;
-		y = rand() % n;
-		map[x][y] = 1;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> arr[i][j];
+		}
+	}
+	int count1 = 0;
+	for (int i = 0; i < n; i++) {   //основываясь на том, что кол-во единииц 1 игрока равно кол-ву единиц 2 игрока
+		for (int j = 0; j < n; j++) {
+			if (arr[i][j] == 1)
+				count1++;
+		}
+	}
+	cout << "Второй игрок расставляет корабли" << endl;
+	_sleep(2000);
+	system("cls");
+	for (int j = 0; j < n; j++) {
+		for (int z = 0; z < n; z++) {
+			cin >> arr[j][z];
+		}
 	}
 
-
+	int x1, y1, x2, y2;
 
 	while (true) {
-		cout << "Куда стреляем" << endl;
-		cin >> x >> y; 
+		cout << "Первый игрок стреляет" << endl;
+		Sleep(2000);
+		system("cls");
 
-		if (map[x][y] == 1) {
-			cout << "Попал, красавчик" << endl;
-			map[x][y] = 3; // цифра для попадания
+		cin >> x >> y;
+		if (arr[x][y] == 1) {
+			arr[x][y] == 2; //2 - код попадания
 
-			bool ship_detect = false;
+		}
 
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < n; j++) {
-					if (map[i][j] == 1) {
-						ship_detect = true;
-						break;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				cout << " 0 1 2 3 4 5 6 7 8 9" << endl;
+				for (int i = 0; i < 10; i++) {
+					cout << i << " ";
+					for (int j = 0; j < 10; j++) {
+						if (arr[i][j] == 0) {
+							cout << " ";
+						}
+						else if (arr[i][j] == 1) {
+							cout << "#";
+						}
+						else if (arr[i][j] == 2) {
+							cout << "+";
+						}
+						cout << " ";
 					}
+					cout << endl;
 				}
-				if (ship_detect == true) {
-					break;
-				}
-			}
-			if (ship_detect == false) {
-				cout << "Вы выиграли, конгратьюлейшен!" << endl;
-				break;
 			}
 		}
+
+		Sleep(2000);
+		system("cls");
 		else {
-			cout << "Мазила" << endl;
-			map[x][y] = 4; // цифра для промаха
+			arr[x][y] = 3;
+			cout << " 0 1 2 3 4 5 6 7 8 9" << endl;
+			for (int i = 0; i < 10; i++) {
+				cout << i << " ";
+				for (int j = 0; j < 10; j++) {
+					if (arr[i][j] == 0) {
+						cout << " ";
+					}
+					else if (arr[i][j] == 1) {
+						cout << "#";
+					}
+					else if (arr[i][j] == 2) {
+						cout << "+";
+					}
+					else if (arr[i][j]) {
+						cout << ".";
+					}
+					cout << " ";
+				}
+				cout << endl;
+			}
 		}
+		Sleep(2000);
+		system("cls");
 
+		cout << "Стреляет второй игрок" << endl;
+		Sleep(2000);
+		system("cls");
+		cin >> x >> y;
+		if (arr[x][y] == 1) {
+			arr[x][y] == 2; //2 - код попадания
+		}
+		for (int j = 0; j < n; j++) {
+			for (int z = 0; z < n; z++) {
+				cout << " 0 1 2 3 4 5 6 7 8 9" << endl;
+				for (int j = 0; j < 10; j++) {
+					cout << j << " ";
+					for (int z = 0; z < 10; z++) {
+						if (arr[j][z] == 0) {
+							cout << " ";
+						}
+						else if (arr[j][z] == 1) {
+							cout << "#";
+						}
+						else if (arr[j][z] == 2) {
+							cout << "+";
+						}
+						cout << " ";
+					}
+					cout << endl;
+				}
+			}
+		}
+		Sleep(2000);
+		system("cls");
+		else {
+			arr[x][y] = 3;
+			cout << " 0 1 2 3 4 5 6 7 8 9" << endl;
+			for (int j = 0; j < 10; j++) {
+				cout << j << " ";
+				for (int z = 0; z < 10; z++) {
+					if (arr[j][z] == 0) {
+						cout << " ";
+					}
+					else if (arr[j][z] == 1) {
+						cout << "#";
+					}
+					else if (arr[j][z] == 2) {
+						cout << "+";
+					}
+					else if (arr[j][z]) {
+						cout << ".";
+					}
+					cout << " ";
+				}
+				cout << endl;
+			}
+			Sleep(2000);
+			system("cls");
+
+		}
 	}
-	return 0;
 
+	return 0;
 }
